@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/bmkpblog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/bmkpblog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/bmkpblog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/bmkpblog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/bmkpblog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/bmkpblog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/bmkpblog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Android Studio 将github作为远程maven仓库github是一样很好用的工具，除了能作为开源项目的搜索工具外，还能用来搭建maven仓库，方便远程的使用。为此，我查阅了一些资料也结合了一些博主的博客，一步步试验最后成功搭建出了这样的maven仓库，在这里我将整个搭建的过程分享给大家。 一、准备 准备好两样必要的工具 git和gradle 1.安装git，直接下载一个 GitHu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Studio 将github作为远程maven仓库">
+<meta property="og:url" content="https://youngitboy.github.io/2018/08/15/Android-Studio-将github作为远程maven仓库/index.html">
+<meta property="og:site_name" content="『吴扬』的 blog">
+<meta property="og:description" content="Android Studio 将github作为远程maven仓库github是一样很好用的工具，除了能作为开源项目的搜索工具外，还能用来搭建maven仓库，方便远程的使用。为此，我查阅了一些资料也结合了一些博主的博客，一步步试验最后成功搭建出了这样的maven仓库，在这里我将整个搭建的过程分享给大家。 一、准备 准备好两样必要的工具 git和gradle 1.安装git，直接下载一个 GitHu">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1534315440071.png">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1534315497183.png">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1534315520256.png">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1534315981593.png">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1534315581437.png">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1534315641656.png">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1534315663935.png">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1534315847013.png">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1534315862513.png">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1534315885889.png">
+<meta property="og:updated_time" content="2018-08-15T07:01:12.585Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Studio 将github作为远程maven仓库">
+<meta name="twitter:description" content="Android Studio 将github作为远程maven仓库github是一样很好用的工具，除了能作为开源项目的搜索工具外，还能用来搭建maven仓库，方便远程的使用。为此，我查阅了一些资料也结合了一些博主的博客，一步步试验最后成功搭建出了这样的maven仓库，在这里我将整个搭建的过程分享给大家。 一、准备 准备好两样必要的工具 git和gradle 1.安装git，直接下载一个 GitHu">
+<meta name="twitter:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1534315440071.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/bmkpblog/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://youngitboy.github.io/2018/08/15/Android-Studio-将github作为远程maven仓库/"/>
+
+
+
+
+
+  <title>Android Studio 将github作为远程maven仓库 | 『吴扬』的 blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/bmkpblog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">『吴扬』的 blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">「专注安卓，持续学习」</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/bmkpblog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/bmkpblog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/bmkpblog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://youngitboy.github.io/bmkpblog/2018/08/15/Android-Studio-将github作为远程maven仓库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吴扬">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530176446599&di=06829f26e92c618151e0da57a3d44ca2&imgtype=0&src=http%3A%2F%2Fupload.techweb.com.cn%2F2017%2F1206%2F1512523905644.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="『吴扬』的 blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android Studio 将github作为远程maven仓库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-15T14:39:32+08:00">
+                2018-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/bmkpblog/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/bmkpblog/2018/08/15/Android-Studio-将github作为远程maven仓库/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/08/15/Android-Studio-将github作为远程maven仓库/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Android-Studio-将github作为远程maven仓库"><a href="#Android-Studio-将github作为远程maven仓库" class="headerlink" title="Android Studio 将github作为远程maven仓库"></a>Android Studio 将github作为远程maven仓库</h1><p>github是一样很好用的工具，除了能作为开源项目的搜索工具外，还能用来搭建maven仓库，方便远程的使用。为此，我查阅了一些资料也结合了一些博主的博客，一步步试验最后成功搭建出了这样的maven仓库，在这里我将整个搭建的过程分享给大家。</p>
+<p>一、准备</p>
+<p>准备好两样必要的工具 git和gradle</p>
+<p>1.安装git，直接下载一个</p>
+<p><a href="https://desktop.github.com/" target="_blank" rel="noopener">GitHub Desktop for Mac</a></p>
+<p>安装之后，附带着也会安装好git环境</p>
+<p>重新启动终端，输入 git –version </p>
+<p><img src="C:\Users\ADMINI~1\AppData\Local\Temp\1534315440071.png" alt="1534315440071"></p>
+<p>如果输出的类似截图的结果的话则git环境配置好了。 </p>
+<p>2.安装gradle</p>
+<p>直接上百度搜索gradle，去官网下载一个，官网<a href="http://gradle.org/" target="_blank" rel="noopener">http://gradle.org/</a></p>
+<p>下载好之后，会得到一个zip文件，解压即可 </p>
+<p> <img src="C:\Users\ADMINI~1\AppData\Local\Temp\1534315497183.png" alt="1534315497183"></p>
+<p>在bin里面的gradle文件就是我们所需要的，我们将其配置到系统环境变量中即可。</p>
+<p>windows中将路径配置到环境参数，mac/ninux中将路径添加到 ~/.bash_profile中。</p>
+<p>之后重新打开终端，输入gradle -v </p>
+<p> <img src="C:\Users\ADMINI~1\AppData\Local\Temp\1534315520256.png" alt="1534315520256"></p>
+<p>如果成功打印出了gradle的版本信息的话则表示gradle配置成功。</p>
+<p>二、步骤</p>
+<p>整个操作主要分为以下几个步骤：</p>
+<p>1.第一步当然是在github上创建一个repository</p>
+<p>2.创建lib工程</p>
+<p>3.生成maven文件</p>
+<p>4.上传到github</p>
+<p>5.工程远程调用 </p>
+<p>三、详细操作</p>
+<p>1.在github上创建repository </p>
+<p> <img src="C:\Users\ADMINI~1\AppData\Local\Temp\1534315981593.png" alt="1534315981593"></p>
+<p>在github上创建好repository之后，可以在电脑本地的创建一个空的文件夹命名为MavenTest，作为本地的repository，终端进入到该文件夹，依次输入：</p>
+<p>git init</p>
+<p>git remote add origin <a href="https://github.com/youngitboy/maven_center.git" target="_blank" rel="noopener">https://github.com/youngitboy/maven_center.git</a></p>
+<p>将该目录与远程仓库进行绑定</p>
+<p>这个时候作为测试，也可以创建一个README文件</p>
+<p>里面随便输入一些东西，之后提交到github上面</p>
+<p>第一次提交的时候使用命令：</p>
+<p>git push -u origin master</p>
+<p>推送成功之后，将会在github上看到推送上去的README文件。 </p>
+<p>2.创建lib工程</p>
+<p>打开android studio，随便创建一个测试主工程。</p>
+<p>之后再创建一个module，module类型是 Android Library，如图所示 </p>
+<p> <img src="C:\Users\ADMINI~1\AppData\Local\Temp\1534315581437.png" alt="1534315581437"></p>
+<p>名字随便取，这里为了方便取为：maventest</p>
+<p>创建一个测试类名为MavenTestActivity （可以创建任意的类）</p>
+<p>这里创建了一个测试用的Activity的虚类，内容可以随便编写，只要没有语法错误就行</p>
+<p><img src="C:\Users\ADMINI~1\AppData\Local\Temp\1534315641656.png" alt="1534315641656"></p>
+<p>3.生成maven文件</p>
+<p>先选择本地一个空的文件目录作为maven文件的存放的地方</p>
+<p>然后打开android studio中的gradle.properties文件 </p>
+<p> <img src="C:\Users\ADMINI~1\AppData\Local\Temp\1534315663935.png" alt="1534315663935"></p>
+<p>在gradle.properties的最后一行加入所选择的目录的路径(mac系统)：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aar.mavenRepositoryPath=<span class="regexp">/Users/</span>apple<span class="regexp">/Desktop/</span>Workspace<span class="regexp">/android/</span>demos<span class="regexp">/MavenGithub/</span>githubmavenlib/mavenRepository</span><br></pre></td></tr></table></figure>
+<p>打开该modul的build.gradle（非工程的gradle）文件</p>
+<p>在开头的地方添加一行</p>
+<p>apply plugin: ‘maven’</p>
+<p>然后再最后添加以下内容： </p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">uploadArchives&#123;</span><br><span class="line"></span><br><span class="line">    repositories.mavenDeployer &#123;</span><br><span class="line">        <span class="keyword">def</span> mavenRepositoryPath = file(getProperty(<span class="string">'aar.mavenRepositoryPath'</span>))</span><br><span class="line">        repository(<span class="string">url:</span> <span class="string">"file://$&#123;mavenRepositoryPath.absolutePath&#125;"</span>)</span><br><span class="line">        pom.project&#123;</span><br><span class="line">            groupId <span class="string">"com.obo"</span></span><br><span class="line">            artifactId <span class="string">"githubmavenlib"</span></span><br><span class="line">            version <span class="number">1.0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里面groupId可以填包名，artifactId可以填module名称，version是当前module的版本，可以填1.0 （这三个参数都可以自己决定，这个最后影响的是调用这个远程库的时候compile里面所要填写的值，比如按照图片的参数来的话，最后使用的时候得写 compile ‘com.obo:mavantest:1.0’）</p>
+<p>一整个build.gradle的内容如下：</p>
+<p>然后打开终端，cd到该gradle文件所在的目录，运行输入命令：</p>
+<p>gradle uploadArchives</p>
+<p>就会开始运行gradle，稍微等待一点时间</p>
+<p>如果最后gradle运行结果没有报错的话，则会在之前所选定的MavenTest目录下生成一组文件。（与github绑定的本地目录） </p>
+<p> <img src="C:\Users\ADMINI~1\AppData\Local\Temp\1534315847013.png" alt="1534315847013"></p>
+<p>最里面的那些就是我们所需要的Maven文件。</p>
+<p>我们打开maven-metadata.xml，可以看到里面的参数都已经配置完毕了。 </p>
+<p> <img src="C:\Users\ADMINI~1\AppData\Local\Temp\1534315862513.png" alt="1534315862513"></p>
+<p>而实际上，我们也可以看到在目录1.0下面有一个maventest-1.0.aar文件，其实就是</p>
+<p>4.上传到github</p>
+<p>终端进入到该目录下（MavenTest目录），依次输入：</p>
+<p>git add ./                              //将整个目录下的改变全部添加</p>
+<p>git commit -m “toast”          //将修改进行提交</p>
+<p>git push origin master         //将master分支推送仓库 </p>
+<p> <img src="C:\Users\ADMINI~1\AppData\Local\Temp\1534315885889.png" alt="1534315885889"></p>
+<p>当然也可以使用github desktop可视化工具方便地进行以上全部的操作。</p>
+<p>完成之后，在网页上打开github,可以看到内容全部都推送上去了，操作很成功。 </p>
+<p>复制出当前界面的连接地址，比如</p>
+<p><a href="https://github.com/youngitboy/maven_center" target="_blank" rel="noopener">https://github.com/youngitboy/maven_center</a></p>
+<p>对其进行修改：</p>
+<p>[<a href="https://raw.githubusercontent.com/youngitboy/maven_center/master" target="_blank" rel="noopener">https://raw.githubusercontent.com/youngitboy/maven_center/master</a></p>
+<p>即 github.com ——&gt; raw.githubusercontent.com</p>
+<p>再在末尾追加/master</p>
+<p>表示当前要选用的是master分支的内容</p>
+<p>5.工程远程调用</p>
+<p>打开需要调用该远程maven的module的build.gradle</p>
+<p>在最后增加： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line"></span><br><span class="line">    jcenter()</span><br><span class="line"></span><br><span class="line">    maven &#123;</span><br><span class="line"></span><br><span class="line">        url &quot;https://raw.githubusercontent.com/youngitboy/maven_center/master&quot;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果原先就已经存在repository了的话，则直接在里面添加，这里的url的值就是我们修改后的链接，表示要将该链接作为自定义仓库的地址。</p>
+<p>之后在dependencies下增加 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies&#123;</span><br><span class="line"></span><br><span class="line">    compile &apos;cn.youngitboy:maventest:1.0&apos;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译一遍，如果没有错误的话则说明远程调用成功了，之后就可以在程序里调用了。</p>
+<p>到此，整个远程的库配置结束。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/bmkpblog/2018/08/15/Android的Nexus搭建Maven私有仓库/" rel="next" title="Android的Nexus搭建Maven私有仓库">
+                <i class="fa fa-chevron-left"></i> Android的Nexus搭建Maven私有仓库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530176446599&di=06829f26e92c618151e0da57a3d44ca2&imgtype=0&src=http%3A%2F%2Fupload.techweb.com.cn%2F2017%2F1206%2F1512523905644.png"
+                alt="吴扬" />
+            
+              <p class="site-author-name" itemprop="name">吴扬</p>
+              <p class="site-description motion-element" itemprop="description">学而时习之</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/bmkpblog/archives">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/bmkpblog/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/youngitboy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href=":wuyang.inchina@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-globe"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-Studio-将github作为远程maven仓库"><span class="nav-number">1.</span> <span class="nav-text">Android Studio 将github作为远程maven仓库</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吴扬</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/bmkpblog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/bmkpblog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/bmkpblog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/bmkpblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/bmkpblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/bmkpblog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/bmkpblog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/bmkpblog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/bmkpblog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/bmkpblog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/bmkpblog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/bmkpblog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/bmkpblog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://youngitboy.github.io/2018/08/15/Android-Studio-将github作为远程maven仓库/';
+          this.page.identifier = '2018/08/15/Android-Studio-将github作为远程maven仓库/';
+          this.page.title = 'Android Studio 将github作为远程maven仓库';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
